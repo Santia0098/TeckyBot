@@ -1,0 +1,43 @@
+settings:
+    name: TeckyBot
+conversations:
+    - 'saludar.yaml'
+    - 'respuesta.yaml'
+
+slots:
+    - name
+    - afirmativo
+    - negativo
+
+strategies:
+    name:
+        - say "¿Cual es tu nombre?"
+	  input name
+	- remember name
+
+    afirmativo:
+	- say "¿Consideras que tienes la habilidad de adaptarte a distintos lenguajes de programación?"
+	- input respuesta1
+	- remember respuesta1
+	- say "¿Tienes liderazgo al trabajar en grupo?"
+	- input respuesta2
+	- remember respuesta2
+	- say "Y ¿Consideras que aportas ideas interesantes o eres un buen integrante dentro de un equipo de trabajo?"
+	- input respuesta3
+	- remember respuesta3
+    negativo:
+	- say "Nos vemos pronto"
+	
+
+script: 
+	- solve saludar
+	- loop_slots
+	- say "hola {} soy TeckyBot".format(name)
+	- say "Mi proposito es ayudarte a conocer si la carrera ISC es para ti"
+	- say "La carrera ISC cuenta con x doctores en el área, x maestros, x ingenieros, han obtenido los logros de ….," 
+	- say "¿deseas hacer una encuesta para ver si este perfil es favorable para ti? "
+	- input answr | asign si:ok no:oknt
+	- if answr == "ok" then solve afirmativo
+	//aqui va la condicional para evaluar cuantas respuestas fueron positivas o negativas
+	- say "Según la evaluación aplicada, esta carrera {} es apta para ti, ya que {} cuentas con las cosas necesarias para ser un buen ingeniero en sistemas".format(res)
+	- if answr == "oknt" then solve negativo
