@@ -41,3 +41,4 @@ script:
 	//aqui va la condicional para evaluar cuantas respuestas fueron positivas o negativas
 	- say "Según la evaluación aplicada, esta carrera {} es apta para ti, ya que {} cuentas con las cosas necesarias para ser un buen ingeniero en sistemas".format(res)
 	- if answr == "oknt" then solve negativo
+	//
