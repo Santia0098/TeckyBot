@@ -1,0 +1,67 @@
+settings:
+    name: TeckyBot
+conversations:
+    - 'saludar.yaml'
+    - 'respuesta.yaml'
+
+slots:
+    - name
+    - afirmativo
+    - negativo
+
+strategies:
+    name:
+    - say "¿Cual es tu nombre?"
+    - input name
+    - remember name
+
+    afirmativo:
+    - say "¿Te gustan los juegos y actividades que necesitan mucho razonamiento?"
+    - input respuesta1
+    - remember respuesta1
+    - say "¿Te fijas en los detalles aún más pequeños?"       
+    - input respuesta2
+    - remember respuesta2
+    - say "Si algo te sale mal,¿ buscas justo en dónde se generó el problema?"      
+    - input respuesta3
+    - remember respuesta3
+    - say "¿Tienes la capacidad de hacer la conexión entre datos para sacar conclusiones?"
+    - input respuesta4
+    - remember respuesta4
+    - say "¿Eres autodidacta en actualizar constantemente tus conocimientos que ya tienes?"
+    - input respuesta5
+    - remember respuesta5
+    - say "¿Tienes la capacidad de estar bajo estres constante?"
+    - input respuesta6
+    - remember respuesta6
+    - say  "¿Tienes liderazgo al trabajar en grupo?" 
+    - input respuesta7
+    - remember respuesta7
+    - say "¿Consideras que aportas ideas interesantes o eres un buen integrante dentro de un equipo de trabajo?" 
+    - input respuesta8
+    - remember respuesta8
+    - say "¿Te mantienes actualizado en tecnología?"  
+    - input respuesta9
+    - remember respuesta9
+    - say "¿Consideras que tienes la habilidad de adaptarte a distintos lenguajes de programación?"
+    - input respuesta10
+    - remember respuesta10
+    negativo:
+    - say "Nos vemos pronto"
+    //
+    
+
+script: 
+    - solve saludar
+    - loop_slots
+    - say "Hola {} soy TeckyBot".format(name)
+    - say "Mi proposito es ayudarte a conocer si la carrera ISC es para ti"
+    - say "La carrera ISC cuenta con 5 doctores, 7 maestros, 1 ingenieros" 
+    - say "Tiene lineas de investigación en Aprendizaje Automático y aplicaciones, visión Computacional, modelos Gráficos Probabilistas, minería de datos, redes neuronales, Deep Learning, proceamiento de bioseñales y computación médica, computación Cognitiva." 
+    - say "¿deseas hacer una encuesta para ver si este perfil es favorable para ti? "
+    - input answr | asign si:ok no:oknt
+    - if answr == "ok" then solve afirmativo
+    //aqui va la condicional para evaluar cuantas respuestas fueron positivas o negativas
+    - say "Según la evaluación aplicada, esta carrera {} es apta para ti, ya que {} cuentas con las cosas necesarias para ser un buen ingeniero en sistemas".format(res)
+    - if answr == "oknt" then solve negativo
+	//
